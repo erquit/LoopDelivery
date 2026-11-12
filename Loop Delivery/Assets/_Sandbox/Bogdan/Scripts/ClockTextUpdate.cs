@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class ClockTextUpdate : MonoBehaviour
 {
+    [SerializeField]
     private TextMeshProUGUI clockTextMesh;
+    [SerializeField]
+    private TextMeshProUGUI clockTimeOfDayTextMesh;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        clockTextMesh = GetComponent<TextMeshProUGUI>();
-        if (clockTextMesh == null)
-        {
-            Debug.LogError("TextMeshPro component not found on the GameObject.");
-        }
+        
     }
 
     // Update is called once per frame
@@ -29,12 +28,16 @@ public class ClockTextUpdate : MonoBehaviour
 
             if (clockManager.isClockRunning)
             {
-                clockTextMesh.color = Color.black; // Clock is running
+                clockTextMesh.color = Color.black;
             }
             else
             {
-                clockTextMesh.color = Color.darkGray; // Clock is paused
+                clockTextMesh.color = Color.darkGray;
             }
+
+            GlobalClockManager.TimeOfDay currentTimeOfDay = clockManager.getCurrentTimeOfDay();
+            clockTimeOfDayTextMesh.text = currentTimeOfDay.ToString();
+            clockTimeOfDayTextMesh.color = Color.black;
 
         } else {
             clockTextMesh.text = "Clock Manager not found";
