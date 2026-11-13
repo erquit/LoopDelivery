@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour
     [Header("Input Settings")]
     [SerializeField] private InputActionReference moveAction;
 
-    // #region AnimatorHashValues
-    // private static readonly int HorizontalMovement = Animator.StringToHash("HorizontalMovement");
-    // private static readonly int VerticalMovement = Animator.StringToHash("VerticalMovement");
-    // private static readonly int Moving = Animator.StringToHash("Moving");
-    // private static readonly int PreviousHorizontalMovement = Animator.StringToHash("PreviousHorizontalMovement");
-    // private static readonly int PreviousVerticalMovement = Animator.StringToHash("PreviousVerticalMovement");
-    // private static readonly int Die = Animator.StringToHash("Die");
-    // #endregion
+    #region AnimatorHashValues
+    private static readonly int HorizontalMovement = Animator.StringToHash("HorizontalMovement");
+    private static readonly int VerticalMovement = Animator.StringToHash("VerticalMovement");
+    private static readonly int Moving = Animator.StringToHash("Moving");
+    private static readonly int PreviousHorizontalMovement = Animator.StringToHash("PreviousHorizontalMovement");
+    private static readonly int PreviousVerticalMovement = Animator.StringToHash("PreviousVerticalMovement");
+    private static readonly int Die = Animator.StringToHash("Die");
+    #endregion
     
     private Vector2 _movement;
     private Vector2 _previousMovement;
@@ -62,65 +62,65 @@ public class PlayerController : MonoBehaviour
         _rb.MovePosition(_rb.position + ds*_movement);
     }
 
-    // private void LateUpdate()
-    // {
-    //     if (fourDirectionAnimation)
-    //     {
-    //         UpdateAnimator(_movement);
-    //     }
-    //     else
-    //     {
-    //         UpdateAnimatorTwoDirections(_movement);
-    //     }
-    // }
+    private void LateUpdate()
+    {
+        if (fourDirectionAnimation)
+        {
+            UpdateAnimator(_movement);
+        }
+        else
+        {
+            UpdateAnimatorTwoDirections(_movement);
+        }
+    }
     
-    // private void UpdateAnimatorTwoDirections(Vector2 movement)
-    // {
-    //     bool moving = movement.x!=0 || movement.y!=0;
+    private void UpdateAnimatorTwoDirections(Vector2 movement)
+    {
+        bool moving = movement.x!=0 || movement.y!=0;
 
-    //     if (moving)
-    //     {
-    //         if (movement.y != 0)
-    //         {
-    //             // it is moving vertically so we have to use previous x movement
-    //             _animator.SetFloat(HorizontalMovement,_previousMovement.x);
-    //             print(_previousMovement);
-    //         }
-    //         else
-    //         {
-    //             _animator.SetFloat(HorizontalMovement,movement.x);    
-    //             _previousMovement = movement;
-    //         }
+        if (moving)
+        {
+            if (movement.y != 0)
+            {
+                // it is moving vertically so we have to use previous x movement
+                _animator.SetFloat(HorizontalMovement,_previousMovement.x);
+                print(_previousMovement);
+            }
+            else
+            {
+                _animator.SetFloat(HorizontalMovement,movement.x);    
+                _previousMovement = movement;
+            }
             
-    //     }
-    //     else
-    //     {
-    //         _animator.SetFloat(PreviousHorizontalMovement, _previousMovement.x);
-    //         _animator.SetFloat(PreviousVerticalMovement, 0f);
-    //     }
+        }
+        else
+        {
+            _animator.SetFloat(PreviousHorizontalMovement, _previousMovement.x);
+            _animator.SetFloat(PreviousVerticalMovement, 0f);
+        }
 
-    //     _animator.SetBool(Moving,moving);
-    // }
+        _animator.SetBool(Moving,moving);
+    }
 
-    // private void UpdateAnimator(Vector2 movement)
-    // {
-    //     bool moving = movement.x!=0 || movement.y!=0;
+    private void UpdateAnimator(Vector2 movement)
+    {
+        bool moving = movement.x!=0 || movement.y!=0;
 
-    //     if (moving)
-    //     {
+        if (moving)
+        {
             
-    //         _animator.SetFloat(HorizontalMovement,movement.x);
-    //         _animator.SetFloat(VerticalMovement,movement.y);
-    //         _previousMovement = movement;
-    //     }
-    //     else
-    //     {
-    //         _animator.SetFloat(PreviousHorizontalMovement, _previousMovement.x);
-    //         _animator.SetFloat(PreviousVerticalMovement, _previousMovement.y);
-    //     }
+            _animator.SetFloat(HorizontalMovement,movement.x);
+            _animator.SetFloat(VerticalMovement,movement.y);
+            _previousMovement = movement;
+        }
+        else
+        {
+            _animator.SetFloat(PreviousHorizontalMovement, _previousMovement.x);
+            _animator.SetFloat(PreviousVerticalMovement, _previousMovement.y);
+        }
 
-    //     _animator.SetBool(Moving,moving);
-    // }
+        _animator.SetBool(Moving,moving);
+    }
 
     public void Death()
     {
