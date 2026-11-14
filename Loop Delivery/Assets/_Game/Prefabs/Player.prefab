@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5044088557714504058}
   - component: {fileID: -4649421372074574891}
   m_Layer: 0
-  m_Name: WalkingCharacter
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5456770328226825162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 865ef5ff0675756499fa294f73e84997, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b948f9657a62644ebc84e88aa31a28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   walkingSpeed: 5
@@ -199,7 +199,6 @@ MonoBehaviour:
   movementThreshold: 0.01
   fourDirectionMovement: 0
   fourDirectionAnimation: 1
-  moveAction: {fileID: -951901830350268181, guid: 9c4173916a59b9f4e825a67dbf93e020, type: 3}
   _isOnBike: 0
 --- !u!114 &-4649421372074574891
 MonoBehaviour:
