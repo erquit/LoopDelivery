@@ -1,14 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float characterSpeed = 5;
+    [SerializeField] private float walkingSpeed = 5;
+    [SerializeField] private float bikeSpeed = 10;
     [SerializeField] private float movementThreshold = 0.01f;
     [Space(10)]
     [Tooltip("If false the character can move diagonally.")]
@@ -16,8 +15,6 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [Tooltip("If false only horizontal animations are played.")]
     [SerializeField] private bool fourDirectionAnimation = true;
-    [Header("Input Settings")]
-    [SerializeField] private InputActionReference moveAction;
 
     #region AnimatorHashValues
     private static readonly int HorizontalMovement = Animator.StringToHash("HorizontalMovement");
@@ -25,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int Moving = Animator.StringToHash("Moving");
     private static readonly int PreviousHorizontalMovement = Animator.StringToHash("PreviousHorizontalMovement");
     private static readonly int PreviousVerticalMovement = Animator.StringToHash("PreviousVerticalMovement");
-    private static readonly int Die = Animator.StringToHash("Die");
+    private static readonly int OnBike = Animator.StringToHash("OnBike");
     #endregion
     
     private Vector2 _movement;
@@ -33,6 +30,8 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Animator _animator;
+
+    [SerializeField] private bool _isOnBike = false;
     
     private void Awake()
     {
@@ -40,13 +39,19 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()  => moveAction.action.Enable();
-    private void OnDisable() => moveAction.action.Disable();
+    private void OnMove(InputValue value)
+    {
+        _movement = value.Get<Vector2>();
+    }
+
+    private void OnToggleBike(InputValue value)
+    {
+        _isOnBike = !_isOnBike;
+        _animator.SetBool(OnBike, _isOnBike);
+    }
 
     void Update()
     {
-        _movement = moveAction.action.ReadValue<Vector2>();
-
         if (fourDirectionMovement)
         {
             if (Math.Abs(_movement.x) > movementThreshold)
@@ -58,7 +63,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float ds = characterSpeed * Time.fixedDeltaTime;
+        float speed = _isOnBike ? bikeSpeed : walkingSpeed;
+        float ds = speed * Time.fixedDeltaTime;
         _rb.MovePosition(_rb.position + ds*_movement);
     }
 
