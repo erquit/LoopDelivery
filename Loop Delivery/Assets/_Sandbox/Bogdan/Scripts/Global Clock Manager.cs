@@ -4,7 +4,7 @@ using UnityEngine;
 public class GlobalClockManager : MonoBehaviour
 {
     public static GlobalClockManager Instance;
-
+    
     [Header("Clock Settings")]
     public uint gameClockStartHour = 7; // Default start hour (7 AM)
     public uint gameClockEndHour = 24; // Default end hour (00 AM)
@@ -16,6 +16,8 @@ public class GlobalClockManager : MonoBehaviour
     public GameTime gameAfternoonStartTime = new GameTime(13, 0, 0);
     public GameTime gameDuskStartTime = new GameTime(18, 30, 0);
     public GameTime gameNightStartTime = new GameTime(20, 0, 0);
+
+    // Time of Day. Use these to determine the current time of day in the game. For example, you can use this to change lighting, NPC behavior, etc.
     public enum TimeOfDay
     {
         Morning,
@@ -42,7 +44,7 @@ public class GlobalClockManager : MonoBehaviour
 
         gameMorningStart = new GameTime(gameClockStartHour, 0, 0); // Initialize morning start time based on gameClockStartHour
 
-        startClock();
+        StartClock();
         Debug.Log("Global Clock Manager initialized.");
     }
 
@@ -55,12 +57,12 @@ public class GlobalClockManager : MonoBehaviour
         }
     }
     
-    public void startClock()
+    public void StartClock()
     {
         isClockRunningState = true;
     }
 
-    public void stopClock()
+    public void StopClock()
     {
         isClockRunningState = false;
 
@@ -78,12 +80,12 @@ public class GlobalClockManager : MonoBehaviour
         realTime = (gameTime + boundaryEpsilon) / conversionRate;
     }
 
-    public bool isClockRunning
+    public bool IsClockRunning
     {
         get { return isClockRunningState; }
     }
 
-    public uint getCurrentGameTimeInSeconds()
+    public uint GetCurrentGameTimeInSeconds()
     {
         uint secondsInGameDay = (gameClockEndHour - gameClockStartHour) * 3600; // Total seconds in the game day
         uint gameTimeInSeconds = (uint)(1f * secondsInGameDay / (realLoopTimeInMinutes * 60) * realTime); // Calculate game time in seconds based on real time passed
@@ -98,9 +100,9 @@ public class GlobalClockManager : MonoBehaviour
         return gameHours * 3600 + gameMinutes * 60 + gameSeconds; // Return total seconds since start of the game day
     }
 
-    public TimeOfDay getCurrentTimeOfDay()
+    public TimeOfDay GetCurrentTimeOfDay()
     {
-        uint currentGameTimeInSeconds = getCurrentGameTimeInSeconds();
+        uint currentGameTimeInSeconds = GetCurrentGameTimeInSeconds();
 
         if (currentGameTimeInSeconds >= gameMorningStart.ToTotalSeconds() && currentGameTimeInSeconds < gameMiddayStartTime.ToTotalSeconds())
         {

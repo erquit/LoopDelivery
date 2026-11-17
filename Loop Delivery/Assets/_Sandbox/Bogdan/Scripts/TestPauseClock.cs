@@ -17,14 +17,14 @@ public class TestPauseClock : MonoBehaviour
             GlobalClockManager clockManager = GlobalClockManager.Instance;
             if (clockManager != null)
             {
-                if (clockManager.isClockRunning)
+                if (clockManager.IsClockRunning)
                 {
-                    clockManager.stopClock();
+                    clockManager.StopClock();
                     Debug.Log("Clock paused.");
                 }
                 else
                 {
-                    clockManager.startClock();
+                    clockManager.StartClock();
                     Debug.Log("Clock resumed.");
                 }
             }

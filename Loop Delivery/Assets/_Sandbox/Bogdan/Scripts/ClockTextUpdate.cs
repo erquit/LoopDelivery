@@ -19,14 +19,14 @@ public class ClockTextUpdate : MonoBehaviour
         GlobalClockManager clockManager = GlobalClockManager.Instance;
         if (clockManager != null)
         {
-            uint currentGameTime = clockManager.getCurrentGameTimeInSeconds();
+            uint currentGameTime = clockManager.GetCurrentGameTimeInSeconds();
             uint hours = currentGameTime / 3600;
             uint minutes = (currentGameTime % 3600) / 60;
 
             string formattedTime = string.Format("{0:D2}:{1:D2}", hours, minutes);
             clockTextMesh.text = formattedTime;
 
-            if (clockManager.isClockRunning)
+            if (clockManager.IsClockRunning)
             {
                 clockTextMesh.color = Color.black;
             }
@@ -35,7 +35,7 @@ public class ClockTextUpdate : MonoBehaviour
                 clockTextMesh.color = Color.darkGray;
             }
 
-            GlobalClockManager.TimeOfDay currentTimeOfDay = clockManager.getCurrentTimeOfDay();
+            GlobalClockManager.TimeOfDay currentTimeOfDay = clockManager.GetCurrentTimeOfDay();
             clockTimeOfDayTextMesh.text = currentTimeOfDay.ToString();
             clockTimeOfDayTextMesh.color = Color.black;
 
