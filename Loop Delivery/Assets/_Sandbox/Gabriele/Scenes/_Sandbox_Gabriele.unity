@@ -748,7 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bab4bbfa47f6046a6b8d071fb0d106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
-  interactionRange: 0.5
+  probeDistance: 1
+  probeRadius: 0.3
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -778,11 +779,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8935385906036742452, guid: 954481ab2a5ad4321b148b659625e4cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25795
+      value: -2.16
       objectReference: {fileID: 0}
     - target: {fileID: 8935385906036742452, guid: 954481ab2a5ad4321b148b659625e4cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.30842
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8935385906036742452, guid: 954481ab2a5ad4321b148b659625e4cf, type: 3}
       propertyPath: m_LocalPosition.z
