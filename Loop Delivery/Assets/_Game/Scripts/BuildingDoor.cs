@@ -1,16 +1,13 @@
 using UnityEngine;
 
+// Script to be assigned to a child object of each building, in the position of the door to make it interactable
 public class BuildingDoor : MonoBehaviour, IInteractable
 {
     [SerializeField] private BuildingDataSO building;
 
     public void Interact(GameObject interactor)
     {
-        if (!interactor.TryGetComponent(out PackageInventory inventory))
-        {
-            Debug.Log("BuildingDoor: The player does not have a PackageInventory.");
-            return;
-        }
+        interactor.TryGetComponent(out ParcelInventory inventory);
 
         int delivered = inventory.DeliverTo(building);
         if (delivered > 0)
