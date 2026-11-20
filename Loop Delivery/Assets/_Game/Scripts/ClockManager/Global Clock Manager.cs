@@ -1,9 +1,28 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
+[DefaultExecutionOrder(-100)] // this script's Awake/OnEnable run before other scripts'
 public class GlobalClockManager : MonoBehaviour
 {
     public static GlobalClockManager Instance;
+    
+    // Time of Day. Use these to determine the current time of day in the game. For example, you can use this to change lighting, NPC behavior, etc.
+    public enum TimeOfDay
+    {
+        None = 0,
+        Morning,
+        Midday,
+        Afternoon,
+        Dusk,
+        Night
+    }
+
+    public event Action<TimeOfDay> OnTimeOfDayChanged; // Event for time of day changes
+    private readonly Dictionary<GameTime, Action> subscribers = new Dictionary<GameTime, Action>(); // Dictionary to hold subscribers for specific GameTime events
+    public event Action OnClockStarted; // Event for clock start
+    public event Action OnClockStopped; // Event for clock stop
     
     [Header("Clock Settings")]
     public uint gameClockStartHour = 7; // Default start hour (7 AM)
@@ -17,18 +36,12 @@ public class GlobalClockManager : MonoBehaviour
     public GameTime gameDuskStartTime = new GameTime(18, 30, 0);
     public GameTime gameNightStartTime = new GameTime(20, 0, 0);
 
-    // Time of Day. Use these to determine the current time of day in the game. For example, you can use this to change lighting, NPC behavior, etc.
-    public enum TimeOfDay
-    {
-        Morning,
-        Midday,
-        Afternoon,
-        Dusk,
-        Night
-    }
+    private TimeOfDay lastTimeOfDay = TimeOfDay.None; // Track the last time of day to detect changes
 
     private float realTime = 0f; // Current time in seconds
     private bool isClockRunningState = false;
+
+    private uint nextInGameSecondToProcess = 0; // Track the next second to process for event triggering
 
     void Awake()
     {
@@ -46,6 +59,7 @@ public class GlobalClockManager : MonoBehaviour
 
         StartClock();
         Debug.Log("Global Clock Manager initialized.");
+        nextInGameSecondToProcess = 0; // Initialize the next second to process
     }
 
     void FixedUpdate()
@@ -54,12 +68,37 @@ public class GlobalClockManager : MonoBehaviour
         {
             realTime += Time.fixedDeltaTime;
 
+            /**
+             check subscribers for the current game time and invoke their callbacks if the time has passed. 
+             This ensures that we only invoke callbacks once per in-game second, even if FixedUpdate is 
+             called multiple times within that second.
+            */
+            uint now = GetCurrentGameTimeInSeconds();
+            while (nextInGameSecondToProcess <= now)
+            {
+                GameTime currentGameTime = new GameTime(nextInGameSecondToProcess);
+                if (subscribers.ContainsKey(currentGameTime))
+                {
+                    subscribers[currentGameTime]?.Invoke();
+                }
+                nextInGameSecondToProcess++;
+            }
+
+            // Check for time of day changes and invoke the event if it has changed only at the start of a new time of day
+            TimeOfDay currentTimeOfDay = GetCurrentTimeOfDay();
+            if (lastTimeOfDay < currentTimeOfDay)
+            {
+                OnTimeOfDayChanged?.Invoke(currentTimeOfDay);
+                lastTimeOfDay++;
+            }
+
         }
     }
     
     public void StartClock()
     {
         isClockRunningState = true;
+        OnClockStarted?.Invoke();
     }
 
     public void StopClock()
@@ -78,6 +117,15 @@ public class GlobalClockManager : MonoBehaviour
 
         const float boundaryEpsilon = 0.001f; // In-game seconds
         realTime = (gameTime + boundaryEpsilon) / conversionRate;
+
+        OnClockStopped?.Invoke();
+    }
+
+    public void ResetClock()
+    {
+        realTime = 0f;
+        nextInGameSecondToProcess = 0; // Reset the next second to process
+        lastTimeOfDay = TimeOfDay.None; // Reset the last time of day
     }
 
     public bool IsClockRunning
@@ -102,29 +150,41 @@ public class GlobalClockManager : MonoBehaviour
 
     public TimeOfDay GetCurrentTimeOfDay()
     {
-        uint currentGameTimeInSeconds = GetCurrentGameTimeInSeconds();
+        uint now = GetCurrentGameTimeInSeconds();
 
-        if (currentGameTimeInSeconds >= gameMorningStart.ToTotalSeconds() && currentGameTimeInSeconds < gameMiddayStartTime.ToTotalSeconds())
-        {
-            return TimeOfDay.Morning;
-        }
-        else if (currentGameTimeInSeconds >= gameMiddayStartTime.ToTotalSeconds() && currentGameTimeInSeconds < gameAfternoonStartTime.ToTotalSeconds())
-        {
-            return TimeOfDay.Midday;
-        }
-        else if (currentGameTimeInSeconds >= gameAfternoonStartTime.ToTotalSeconds() && currentGameTimeInSeconds < gameDuskStartTime.ToTotalSeconds())
-        {
-            return TimeOfDay.Afternoon;
-        }
-        else if (currentGameTimeInSeconds >= gameDuskStartTime.ToTotalSeconds() && currentGameTimeInSeconds < gameNightStartTime.ToTotalSeconds())
-        {
-            return TimeOfDay.Dusk;
-        }
-        else
-        {
-            return TimeOfDay.Night;
-        }
+        if (now >= gameNightStartTime.ToTotalSeconds())     return TimeOfDay.Night;
+        if (now >= gameDuskStartTime.ToTotalSeconds())      return TimeOfDay.Dusk;
+        if (now >= gameAfternoonStartTime.ToTotalSeconds()) return TimeOfDay.Afternoon;
+        if (now >= gameMiddayStartTime.ToTotalSeconds())    return TimeOfDay.Midday;
+        if (now >= gameMorningStart.ToTotalSeconds())       return TimeOfDay.Morning;
+        return TimeOfDay.Night; // before morning starts, it's still night
     }
 
     // TODO: Make event handlers for time of day changes, so other scripts can subscribe to these events and react accordingly.
+
+    public void SubscribeToGameTime(GameTime gameTime, Action callback)
+    {
+        if (!subscribers.ContainsKey(gameTime))
+        {
+            subscribers[gameTime] = callback;
+        }
+        else
+        {
+            subscribers[gameTime] += callback; // Add to existing subscribers for this GameTime
+        }
+    }
+
+    public void UnsubscribeFromGameTime(GameTime gameTime, Action callback)
+    {
+        if (subscribers.ContainsKey(gameTime))
+        {
+            subscribers[gameTime] -= callback; // Remove the callback from the subscribers for this GameTime
+
+            // If there are no more subscribers for this GameTime, remove the entry from the dictionary
+            if (subscribers[gameTime] == null)
+            {
+                subscribers.Remove(gameTime);
+            }
+        }
+    }
 }

@@ -7,40 +7,50 @@ public class ClockTextUpdate : MonoBehaviour
     private TextMeshProUGUI clockTextMesh;
     [SerializeField]
     private TextMeshProUGUI clockTimeOfDayTextMesh;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        GlobalClockManager clockManager = GlobalClockManager.Instance;
-        if (clockManager != null)
-        {
-            uint currentGameTime = clockManager.GetCurrentGameTimeInSeconds();
-            uint hours = currentGameTime / 3600;
-            uint minutes = (currentGameTime % 3600) / 60;
+        HandleClockTimeChanged(GlobalClockManager.Instance.GetCurrentGameTimeInSeconds());
+    }
 
-            string formattedTime = string.Format("{0:D2}:{1:D2}", hours, minutes);
-            clockTextMesh.text = formattedTime;
+    private void OnEnable()
+    {
+        GlobalClockManager.Instance.OnTimeOfDayChanged += HandleTimeOfDayChanged;
+        GlobalClockManager.Instance.OnClockStarted += HandleClockStarted;
+        GlobalClockManager.Instance.OnClockStopped += HandleClockStopped;
+    }
 
-            if (clockManager.IsClockRunning)
-            {
-                clockTextMesh.color = Color.black;
-            }
-            else
-            {
-                clockTextMesh.color = Color.darkGray;
-            }
+    private void OnDisable()
+    {
+        GlobalClockManager.Instance.OnTimeOfDayChanged -= HandleTimeOfDayChanged;
+        GlobalClockManager.Instance.OnClockStarted -= HandleClockStarted;
+        GlobalClockManager.Instance.OnClockStopped -= HandleClockStopped;
+    }
 
-            GlobalClockManager.TimeOfDay currentTimeOfDay = clockManager.GetCurrentTimeOfDay();
-            clockTimeOfDayTextMesh.text = currentTimeOfDay.ToString();
-            clockTimeOfDayTextMesh.color = Color.black;
+    private void HandleTimeOfDayChanged(GlobalClockManager.TimeOfDay timeOfDay)
+    {
+        clockTimeOfDayTextMesh.text = timeOfDay.ToString();
+        clockTimeOfDayTextMesh.color = Color.black;
+    }
 
-        } else {
-            clockTextMesh.text = "Clock Manager not found";
-        }
+    private void HandleClockStopped()
+    {
+        clockTextMesh.color = Color.gray;
+        clockTimeOfDayTextMesh.color = Color.gray;
+    }
+
+    private void HandleClockStarted()
+    {
+        clockTextMesh.color = Color.black;
+        clockTimeOfDayTextMesh.color = Color.black;
+    }
+
+    private void HandleClockTimeChanged(uint totalSeconds)
+    {
+        uint hours = totalSeconds / 3600;
+        uint minutes = (totalSeconds % 3600) / 60;
+
+        string formattedTime = string.Format("{0:D2}:{1:D2}", hours, minutes);
+        clockTextMesh.text = formattedTime;
     }
 }
