@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ed565201f49b143b9f523fe284180a, type: 3}
+  m_Name: PackageToBookshop
+  m_EditorClassIdentifier: Assembly-CSharp::PackageDataSO
+  packageID: 2
+  description: Something to The Bookshop
+  destination: {fileID: 11400000, guid: 7710a5d35ec9500448536a2f2ee76358, type: 2}

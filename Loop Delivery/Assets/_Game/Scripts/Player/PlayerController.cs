@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementThreshold = 0.01f;
     [Space(10)]
     [Tooltip("If false the character can move diagonally.")]
-    [SerializeField] private bool fourDirectionMovement = true;
+    [SerializeField] private bool fourDirectionMovement = false;
     [Space(10)]
     [Tooltip("If false only horizontal animations are played.")]
     [SerializeField] private bool fourDirectionAnimation = true;
@@ -32,6 +32,15 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
 
     [SerializeField] private bool _isOnBike = false;
+
+    public Vector2 Facing {get; private set;} = Vector2.right;
+
+    private static Vector2 SnapToCardinal(Vector2 v)
+    {
+        return Mathf.Abs(v.x) >= Mathf.Abs(v.y)
+            ? new Vector2(Mathf.Sign(v.x), 0f)
+            : new Vector2(0f, Mathf.Sign(v.y)); 
+    }
     
     private void Awake()
     {
@@ -50,7 +59,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(OnBike, _isOnBike);
     }
 
-    void Update()
+    private void Update()
     {
         if (fourDirectionMovement)
         {
@@ -58,6 +67,11 @@ public class PlayerController : MonoBehaviour
             {
                 _movement.y = 0;
             }
+        }
+
+        if (_movement.sqrMagnitude > movementThreshold * movementThreshold)
+        {
+            Facing = fourDirectionMovement ? SnapToCardinal(_movement) : _movement.normalized;
         }
     }
 
