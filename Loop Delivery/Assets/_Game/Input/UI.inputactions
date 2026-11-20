@@ -1,0 +1,36 @@
+{
+    "version": 1,
+    "name": "UI",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "5f0183fe-0c3b-4370-93a0-8140ac81656a",
+            "actions": [
+                {
+                    "name": "ToggleNotebook",
+                    "type": "Button",
+                    "id": "ce17ea2e-8cc5-47d9-832f-52b4946d7c3e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f092759b-92a5-4850-a1cb-2f7580e18e10",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleNotebook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
