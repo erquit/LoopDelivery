@@ -38,6 +38,7 @@ public class TabMenu : MonoBehaviour
         if (isActive)
         {
             GlobalClockManager.Instance.StopClock();
+            GameManager.Instance.PauseGame();
             // Initialize the tabs
             for (int i = 0; i < tabs.Length; i++)
             {
@@ -54,6 +55,7 @@ public class TabMenu : MonoBehaviour
             }
         } else
         {
+            GameManager.Instance.ResumeGame();
             GlobalClockManager.Instance.StartClock();
         }
     }

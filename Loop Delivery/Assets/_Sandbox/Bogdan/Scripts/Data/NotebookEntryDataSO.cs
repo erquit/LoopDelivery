@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,4 +10,6 @@ public class NotebookEntryDataSO : ScriptableObject
     public string entryDescription;
 
     public Clue[] clues; // Array of Clue structs associated with this notebook entry
+
+    public List<NotebookEntryDataSO> leadsTo = new List<NotebookEntryDataSO>();
 }
