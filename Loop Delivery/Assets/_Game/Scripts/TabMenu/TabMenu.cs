@@ -42,6 +42,7 @@ public class TabMenu : MonoBehaviour
             // Initialize the tabs
             for (int i = 0; i < tabs.Length; i++)
             {
+                Debug.Log($"Setting up tab {i}: {tabs[i].tabButton.name}");
                 var tab = tabs[i];
                 tab.tabButton.onClick.AddListener(() => OnTabSelected(tab));
                 if (i == 0)
