@@ -85,7 +85,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +98,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -111,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -513,7 +513,359 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8b31ae109e4d46398581b65b8e120085
-      internalID: 1000000016
+      internalID: 1000000017
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_down_idle
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 157
+        width: 14
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc25bee58ea4dfcb530d5f2825558ed
+      internalID: 1000000018
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_up_idle
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 157
+        width: 12
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce3a6e7457804c6c96783cb26c0f9a0b
+      internalID: 1000000019
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_left_idle
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 157
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ae31141109142e0a983b53bdce4b032
+      internalID: 1000000020
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_right_idle
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 157
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ffbd99c784948aaab6936c41a1cf387
+      internalID: 1000000021
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_down_walk_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 117
+        width: 14
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 445e9a0d784c4370b713657479f71e06
+      internalID: 1000000022
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_up_walk_1
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 117
+        width: 12
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f803a44b605d4f0ebed329bcd5ddb07d
+      internalID: 1000000023
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_left_walk_1
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 117
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 711ab5484aa04d088da8c645689556c7
+      internalID: 1000000024
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_right_walk_1
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 117
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbb10f73805449eca36d8a465ec781cb
+      internalID: 1000000025
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_down_walk_2
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 77
+        width: 14
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ec8405e4daa495186896bf51fd9c683
+      internalID: 1000000026
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_up_walk_2
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 77
+        width: 12
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cff391180fd94e868ffb70dcba233381
+      internalID: 1000000027
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_left_walk_2
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 77
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e462579c6bfe4f77beac5bffa86a9dec
+      internalID: 1000000028
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_right_walk_2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 77
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a2256ab51914152a8d49f4d131c5b41
+      internalID: 1000000029
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_down_walk_3
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 37
+        width: 14
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d0c45ed80f049eebf0ca7bddff875d4
+      internalID: 1000000030
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_up_walk_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 37
+        width: 12
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4424415e14044e81ada9b173046138c3
+      internalID: 1000000031
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_left_walk_3
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 37
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a459f454a954bd18af0aaa681348569
+      internalID: 1000000032
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_right_walk_3
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 37
+        width: 22
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8dd831d38a493899d5ffcce428606d
+      internalID: 1000000033
       vertices: []
       indices:
       edges: []
@@ -521,7 +873,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: d2b44a173ac5422d88baf3a7a32465cc
+    spriteID: b0e6853cd7264ff0a89b39cad58ee0bd
     internalID: 0
     vertices: []
     indices:
@@ -548,7 +900,23 @@ TextureImporter:
       up_3: 1000000014
       up_4: 1000000015
       bike_left: 1000000016
-      bike_right: 1000000016
+      bike_right: 1000000017
+      walk_down_idle: 1000000018
+      walk_up_idle: 1000000019
+      walk_left_idle: 1000000020
+      walk_right_idle: 1000000021
+      walk_down_walk_1: 1000000022
+      walk_up_walk_1: 1000000023
+      walk_left_walk_1: 1000000024
+      walk_right_walk_1: 1000000025
+      walk_down_walk_2: 1000000026
+      walk_up_walk_2: 1000000027
+      walk_left_walk_2: 1000000028
+      walk_right_walk_2: 1000000029
+      walk_down_walk_3: 1000000030
+      walk_up_walk_3: 1000000031
+      walk_left_walk_3: 1000000032
+      walk_right_walk_3: 1000000033
   mipmapLimitGroupName:
   pSDRemoveMatte: 0
   userData:
