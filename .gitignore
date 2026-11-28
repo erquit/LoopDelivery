@@ -1,0 +1,10 @@
+# ---------------------------------------------------------------------------
+# Third-party asset packs — keep local, never commit
+#
+# LimeZu "Modern Exteriors" is a commercial asset pack. Its licence does not
+# allow redistributing the raw source files, and the 48x48 set alone is
+# ~40,000 files / 230 MB. Only the individual sprites we actually use are
+# committed, under "Loop Delivery/Assets/_Game/Sprites/".
+# ---------------------------------------------------------------------------
+modernexteriors-win/
+Modern_Exteriors_RPG_Maker_MV/

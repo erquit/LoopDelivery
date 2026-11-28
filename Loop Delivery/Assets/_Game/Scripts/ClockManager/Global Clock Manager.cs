@@ -101,25 +101,32 @@ public class GlobalClockManager : MonoBehaviour
         OnClockStarted?.Invoke();
     }
 
-    public void StopClock()
+    public void StopClock() => StopClock(true);
+
+    public void StopClock(bool roundToMinute)
     {
         isClockRunningState = false;
-
-        // Make the time stop at the nearest displayed minute for better visual consistency
-        float secondsInGameDay = 1f * (gameClockEndHour - gameClockStartHour) * 3600;
-
-        float conversionRate = secondsInGameDay / (realLoopTimeInMinutes * 60f);
-
-        float gameTime = realTime * conversionRate;
-
-        const float displayedUnit = 60f; // One displayed minute
-        gameTime = Mathf.Floor(gameTime / displayedUnit) * displayedUnit;
-
-        const float boundaryEpsilon = 0.001f; // In-game seconds
-        realTime = (gameTime + boundaryEpsilon) / conversionRate;
-
+        if (roundToMinute)
+        {
+            const float displayedUnit = 60f;
+            float gameTime = realTime * ConversionRate;
+            gameTime = Mathf.Floor(gameTime / displayedUnit) * displayedUnit;
+            realTime = (gameTime + 0.001f) / ConversionRate;
+        }
         OnClockStopped?.Invoke();
     }
+
+    public bool TryAdvanceTo(uint gameTimeInSeconds)
+    {
+        if (gameTimeInSeconds <= GetCurrentGameTimeInSeconds() || gameTimeInSeconds > gameClockEndHour * 3600)
+            return false;
+
+        // Keep the float conversion inside the requested second when the clock truncates it.
+        realTime = (gameTimeInSeconds - gameClockStartHour * 3600 + 0.01f) / ConversionRate;
+        return true;
+    }
+
+    private float ConversionRate => (gameClockEndHour - gameClockStartHour) * 3600f / (realLoopTimeInMinutes * 60f);
 
     public void ResetClock()
     {
@@ -135,8 +142,7 @@ public class GlobalClockManager : MonoBehaviour
 
     public uint GetCurrentGameTimeInSeconds()
     {
-        uint secondsInGameDay = (gameClockEndHour - gameClockStartHour) * 3600; // Total seconds in the game day
-        uint gameTimeInSeconds = (uint)(1f * secondsInGameDay / (realLoopTimeInMinutes * 60) * realTime); // Calculate game time in seconds based on real time passed
+        uint gameTimeInSeconds = (uint)(ConversionRate * realTime);
 
         uint gameHours = gameClockStartHour + (gameTimeInSeconds / 3600) % 24;
         uint gameMinutes = gameTimeInSeconds % 3600 / 60;

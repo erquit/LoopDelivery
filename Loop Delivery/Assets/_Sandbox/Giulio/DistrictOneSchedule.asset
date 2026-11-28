@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8ca2a7065846e0bb4b7d7721ac887d, type: 3}
+  m_Name: DistrictOneSchedule
+  m_EditorClassIdentifier: Assembly-CSharp::LoopDelivery.Giulio.DistrictOneSchedule
+  bakery:
+    opens:
+      hour: 7
+      minute: 0
+      second: 0
+    closes:
+      hour: 11
+      minute: 0
+      second: 0
+  bookshop:
+    opens:
+      hour: 7
+      minute: 0
+      second: 0
+    closes:
+      hour: 11
+      minute: 0
+      second: 0
+  townHall:
+    opens:
+      hour: 11
+      minute: 0
+      second: 0
+    closes:
+      hour: 13
+      minute: 0
+      second: 0
+  marketPassage:
+    opens:
+      hour: 7
+      minute: 0
+      second: 0
+    closes:
+      hour: 9
+      minute: 25
+      second: 0
+  canalUnloading:
+    opens:
+      hour: 10
+      minute: 0
+      second: 0
+    closes:
+      hour: 10
+      minute: 35
+      second: 0
+  arrivalWaitMinutes: 35
